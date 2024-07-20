@@ -41,27 +41,29 @@ function Page() {
     formData.append('image',image);
 
 
-    const response = await axios.post('/api/blog',formData);
+     try{
+      const response = await axios.post('/api/blog',formData);
 
-    if (response.data.success){
-      toast.success(response.data.msg);
-      setImage(false);
-      setData({
-        title: '',
-        description: '',
-        category: 'Startup',
-        author: 'Gokul Gopan',
-        authorImg: '/author_img.png'
-      })
+      if (response.data.success){
+        toast.success(response.data.msg);
+        setImage(false);
+        setData({
+          title: '',
+          description: '',
+          category: 'Startup',
+          author: 'Gokul Gopan',
+          authorImg: '/author_img.png'
+        })
+      }
+      else{
+        toast.error('error')
+      }
+    } catch(error){
+      console.log('Error submitting blog:',error);
+      toast.error('An error occurred. Please try again later.');
     }
-    else{
-      toast.error('error')
-    }
 
-
-
-
-  }
+  };
   return (
     <>
       <form onSubmit={onSubmitHandler} className='pt-5 px-5 sm:pt-12 sm:pt-12 sm:pt-12 sm:pl-16'>
