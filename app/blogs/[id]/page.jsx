@@ -21,13 +21,11 @@ function Page ({params}) {
      
     });    
     setData(response.data);
-    console.log(response.data); 
-  
-  
+    console.log(response.data);   
+  }; 
   useEffect(() => {
     fetchBlogData();
-  },[]);
-  }; 
+  },[params.id]);
 
 
   return (
