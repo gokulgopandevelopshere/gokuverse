@@ -11,28 +11,23 @@ function Page ({params}) {
 
   const [data,setData] = useState(null);
 
-  const fetchBlogData = async () =>{
-    
+  const fetchBlogData = async () =>{    
     const response = await axios.get('/api/blog',{
       params: {
         id:params.id
       }
-    })
-    
+    })    
     setData(response.data);
-    console.log(response.data);
-    
-
+    console.log(response.data); 
   } 
-     
   
-
   useEffect(() => {
     fetchBlogData();
-  },[])
+  },[params]);
 
 
-  return (data ?<>
+  return (
+    data ?<>
     <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
       <div className="flex justify-between items-center">
 
