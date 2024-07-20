@@ -10,22 +10,23 @@ function Page ({params}) {
 
 
   const [data,setData] = useState(null);
-  const axiosInstance = axios.create({
-  timeout: 30000, // 30 seconds
-});
-  const fetchBlogData = async () =>{    
-    const response = await axiosInstance.get('/api/blog',{
-      params: {
-        id:params.id
-      },
-     
-    });    
-    setData(response.data);
-    console.log(response.data);   
-  }; 
   useEffect(() => {
+    const fetchBlogData = async () => {
+      try {
+        const response = await axios.get(`/api/blog/${params.id}`);
+        setData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          console.error("Axios error:", error.message);
+        } else {
+          console.error("Unexpected error:", error);
+        }
+      }
+    };
+
     fetchBlogData();
-  });
+  }, [params.id]);
 
 
   return (
