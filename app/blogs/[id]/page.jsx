@@ -24,7 +24,7 @@ function Page ({params}) {
   
   useEffect(() => {
     fetchBlogData();
-  },[params]);
+  },[data]);
 
 
   return (
