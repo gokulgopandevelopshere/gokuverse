@@ -10,21 +10,24 @@ function Page ({params}) {
 
 
   const [data,setData] = useState(null);
-  const timeout = 10000;
+  const axiosInstance = axios.create({
+  timeout: 30000, // 30 seconds
+});
   const fetchBlogData = async () =>{    
-    const response = await axios.get('/api/blog',{
+    const response = await axiosInstance.get('/api/blog',{
       params: {
         id:params.id
       },
-      timeout
+     
     });    
     setData(response.data);
     console.log(response.data); 
-  }; 
+  
   
   useEffect(() => {
     fetchBlogData();
-  },[data,fetchBlogData]);
+  },[]);
+  }; 
 
 
   return (
